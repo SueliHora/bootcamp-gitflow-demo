@@ -18,3 +18,7 @@ Repositório de demonstração do fluxo Gitflow (projeto fictício).
 ## Padrão de commits
 
 `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+
+## Funções
+
+- `somar(valor1, valor2)`: realiza a soma de dois valores.
