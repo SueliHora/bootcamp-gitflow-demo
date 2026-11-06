@@ -21,4 +21,4 @@ Repositório de demonstração do fluxo Gitflow (projeto fictício).
 
 ## Funções
 
-- `somar(valor1, valor2)`: realiza a soma de dois valores.
+- multiplicar(valor1, valor2): realiza a multiplicação de dois valores.
