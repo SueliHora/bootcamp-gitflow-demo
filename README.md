@@ -21,4 +21,4 @@ Repositório de demonstração do fluxo Gitflow (projeto fictício).
 
 ## Funções
 
-- multiplicar(valor1, valor2): realiza a multiplicação de dois valores.
+- dividir(valor1, valor2): realiza a divisão de dois valores, com tratamento para divisão por zero.
