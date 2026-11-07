@@ -22,3 +22,7 @@ Repositório de demonstração do fluxo Gitflow (projeto fictício).
 ## Funções
 
 - multiplicar(valor1, valor2): realiza a multiplicação de dois valores.
+
+## Exemplo de uso
+
+`node src/index.js`
