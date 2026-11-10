@@ -1,0 +1,12 @@
+{
+  "name": "exercicio-1",
+  "version": "1.0.0",
+  "description": "Exercicio 1 - Hello Container",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

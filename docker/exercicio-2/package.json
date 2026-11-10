@@ -1,0 +1,13 @@
+{
+  "name": "exercicio-2",
+  "version": "1.0.0",
+  "description": "Exercicio 2 - API + Banco",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
