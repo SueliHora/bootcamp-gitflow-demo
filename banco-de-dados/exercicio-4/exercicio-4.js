@@ -1,14 +1,15 @@
-// Seleciona a base de dados
-db = db.getSiblingDB('orion_db');
+use orion_db
 
-// Garante o estado inicial da coleção para execução determinística
-db.posts.drop();
+// Limpa a coleção para garantir execução limpa
+db.posts.drop()
+
+// Inserção inicial (Schema Flexível)
 db.posts.insertMany([
     {
-        titulo: "Introdução ao NoSQL e MongoDB",
+        titulo: "Introdução ao SQL",
         autor: "João Silva",
-        tags: ["nosql", "mongodb", "orientado-a-documentos"],
-        publicado: true
+        visualizacoes: 120,
+        tags: ["sql", "relacional"]
     },
     {
         titulo: "Modelagem Flexível na Prática",
@@ -19,25 +20,32 @@ db.posts.insertMany([
             tempo_leitura_min: 6
         }
     }
-]);
+])
 
-// 1. Consulta com filtro (find)
-print("=== 1. Filtro: Posts de Maria Oliveira ===");
-printjson(db.posts.find({ autor: "Maria Oliveira" }).toArray());
-
-// 2. Atualização de documento (updateOne com $set)
-const resultadoUpdate = db.posts.updateOne(
+print("\n=== 1. Atualização (updateOne): Adicionando Array e Documento Aninhado ===")
+db.posts.updateOne(
     { autor: "Maria Oliveira" },
-    { $set: { publicado: true, visualizacoes: 300 } }
-);
-print("=== 2. Resultado da Atualização ===");
-printjson(resultadoUpdate);
+    {
+        $set: {
+            visualizacoes: 300,
+            publicado: true,
+            tags: ["mongodb", "nosql", "modelagem"],
+            revisao: {
+                status: "aprovado",
+                nota: 10
+            }
+        }
+    }
+)
 
-// 3. Remoção de documento (deleteOne)
-const resultadoDelete = db.posts.deleteOne({ autor: "João Silva" });
-print("=== 3. Resultado da Remoção ===");
-printjson(resultadoDelete);
+print("\n=== 2. Filtro Avançado (find): Consulta dentro de Array ===")
+db.posts.find({ tags: "mongodb" })
 
-// 4. Listar documentos finais na coleção posts
-print("=== 4. Documentos Restantes na Coleção posts ===");
-printjson(db.posts.find().toArray());
+print("\n=== 3. Filtro Avançado (find): Consulta dentro de Documento Aninhado ===")
+db.posts.find({ "detalhes.categoria": "Arquitetura de Dados", "revisao.status": "aprovado" })
+
+print("\n=== 4. Remoção (deleteOne): Excluindo Post de João Silva ===")
+db.posts.deleteOne({ autor: "João Silva" })
+
+print("\n=== 5. Documentos Restantes na Coleção posts ===")
+db.posts.find()
