@@ -1,63 +1,44 @@
 # bootcamp-orion
 
-Repositório de entregas práticas e demonstração de fluxo Gitflow do Bootcamp Orion.
+Repositório de entregas práticas do Bootcamp Orion, estruturado seguindo o fluxo **Gitflow** e **Conventional Commits**.
 
-## Estrutura do Repositório
+## Conteúdo do Repositório
 
-### 1. Fundamentos de Gitflow (`src/`)
+| Pasta | Conteúdo | Documentação |
+| :--- | :--- | :--- |
+| `src/` | Fundamentos de Git, Gitflow e aplicação base em Node.js | [src/README.md](src/README.md) |
+| `docker/` | Conteinerização com Dockerfile, multi-stage build e Docker Compose | [docker/README.md](docker/README.md) |
+| `banco-de-dados/` | Modelagem relacional, consultas SQL (PostgreSQL) e NoSQL (MongoDB) | [banco-de-dados/README.md](banco-de-dados/README.md) |
 
-- Aplicação Node.js inicial utilizada na prática de fluxo de branches e convenção de commits.
-- Função `multiplicar(valor1, valor2)`: realiza a multiplicação de dois valores (`src/index.js`).
+## Modelo de Branches
 
-### 2. Conteinerização com Docker (`docker/`)
+- `main`: branch principal de produção (código consolidado e aprovado)
+- `develop`: branch de integração das funcionalidades em desenvolvimento
+- `stage`: ambiente de validação (QA/PO)
+- `production`: código entregue ao usuário final
+- `feature/*`: novas entregas ou melhorias, criadas a partir de `develop` e integradas de volta em `develop`
+- `hotfix/*`: correções urgentes, criadas a partir de `main` e integradas em `main` e `develop`
+- `bugfix/*`: correções de homologação, integradas em `stage` e `develop`
 
-- **[Exercício 1 — Hello Container](docker/exercicio-1/README.md):** Aplicação básica em Node.js (`node:20-alpine`) com Dockerfile otimizado e orquestração via Docker Compose.
-- **[Exercício 2 — Stack API + Banco de Dados](docker/exercicio-2/README.md):** Stack multi-container com API Express e PostgreSQL, persistência via volume nomeado (`pgdata`), variáveis de ambiente e rotas `/health` e `/visitas`.
-- **[Exercício 3 — Ambientes de Desenvolvimento e Produção](docker/exercicio-3/README.md):** Dockerfile multi-stage (`base`, `dev`, `prod`) separando live-reload com `nodemon` em desenvolvimento e imagem enxuta com usuário não-root (`node`) em produção.
-- **[Exercício Extra — Stack Completa de 3 Serviços](docker/exercicio-extra/README.md):** Orquestração na rede `app-net` integrando API Node.js Express, PostgreSQL 16 com `healthcheck` (`pg_isready`) e interface web pgAdmin 4.
+## Fluxo de Trabalho (Gitflow)
 
-### 3. Banco de Dados Relacional e NoSQL (`banco-de-dados/`)
+1. Criar uma branch isolada (`feature/*`) a partir de `develop` para cada entrega.
+2. Realizar commits seguindo o padrão semântico e enviar para o repositório remoto.
+3. Abrir Pull Request apontando para `develop` solicitando revisão das mentoras.
+4. Após aprovação e merge em `develop`, consolidar a entrega em `main`.
 
-- **Ambiente Docker (`banco-de-dados/docker-compose.yml`):** Orquestração dos serviços `db_postgres` (PostgreSQL 15) e `db_mongo` (MongoDB 7) com volumes persistentes.
-- **Exercício 1 (`banco-de-dados/exercicio-1/`):** Modelagem relacional com criação das tabelas `cursos` e `alunos`, Chave Primária, Chave Estrangeira e teste de integridade referencial.
-- **Exercício 2 (`banco-de-dados/exercicio-2/`):** Consultas SQL com `INNER JOIN`, filtros (`WHERE`), ordenação (`ORDER BY`) e agregações (`GROUP BY`, `COUNT`).
-- **Exercício 3 (`banco-de-dados/exercicio-3/`):** Operações CRUD básicas no MongoDB (`insertMany`, `find`, `updateOne`, `deleteOne`).
-- **Exercício 4 (`banco-de-dados/exercicio-4/`):** Modelagem flexível no MongoDB com arrays, documentos aninhados (`comentarios` e `revisao`) e consultas avançadas.
+## Padrão de Commits (Conventional Commits)
 
-## Branches
+Formato: `tipo: descrição curta` ou `tipo(escopo): descrição curta`
 
-- `main`: branch principal de entrega consolidada
-- `develop`: integração das features (branch padrão de desenvolvimento)
-- `stage`: validação (QA/PO)
-- `production`: código entregue ao utilizador final
-
-## Fluxo
-
-- Padrão: `feature/*` → `develop` → `stage` → `production`
-- Urgente: `hotfix/*` → `production` e `develop`
-- Bug em homologação: `bugfix/*` → `stage` e `develop`
-
-## Padrão de commits
-
-`feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
-
-## Exemplos de uso
-
-### Módulo inicial (Node.js)
-
-```bash
-node src/index.js
-```
-
-### Módulo de Docker (exemplo no Exercício Extra)
-
-```bash
-cd docker/exercicio-extra
-docker compose up --build -d
-```
-
-### Módulo de Banco de Dados (PostgreSQL e MongoDB)
-
-```bash
-cd banco-de-dados
-docker compose up -d```
+- `feat`: nova funcionalidade ou entrega de exercício
+- `fix`: correção de bug
+- `docs`: alterações exclusivas de documentação
+- `style`: ajustes de formatação sem alteração de lógica
+- `refactor`: refatoração de código sem alterar comportamento
+- `perf`: melhorias de desempenho
+- `test`: adição ou ajuste de testes
+- `build`: alterações de build ou dependências
+- `ci`: configurações de integração contínua
+- `chore`: tarefas de manutenção e configuração de ambiente
+- `revert`: reversão de commit anterior
